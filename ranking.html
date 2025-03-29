@@ -1,13 +1,36 @@
-<div class="food-item">
-    <h3>🍕 Pizza</h3>
-    <button onclick="vote('pizza', 1)">👍 Upvote</button>
-    <button onclick="vote('pizza', -1)">👎 Downvote</button>
-    <p>Votes: <span id="pizza-votes">0</span></p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Voting</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link CSS -->
+</head>
+<body>
 
-<div class="food-item">
-    <h3>🍔 Burger</h3>
-    <button onclick="vote('burger', 1)">👍 Upvote</button>
-    <button onclick="vote('burger', -1)">👎 Downvote</button>
-    <p>Votes: <span id="burger-votes">0</span></p>
-</div>
+    <h1>Vote for Your Favorite Food! 🍽️</h1>
+
+    <div class="food-item">
+        <h3>🍕 Pizza</h3>
+        <button class="vote-btn" onclick="vote('pizza', 1)">👍 Upvote</button>
+        <button class="vote-btn" onclick="vote('pizza', -1)">👎 Downvote</button>
+        <p>Votes: <span id="pizza-votes">0</span></p>
+    </div>
+
+    <div class="food-item">
+        <h3>🍔 Burger</h3>
+        <button class="vote-btn" onclick="vote('burger', 1)">👍 Upvote</button>
+        <button class="vote-btn" onclick="vote('burger', -1)">👎 Downvote</button>
+        <p>Votes: <span id="burger-votes">0</span></p>
+    </div>
+
+    <div class="food-item">
+        <h3>🥗 Salad</h3>
+        <button class="vote-btn" onclick="vote('salad', 1)">👍 Upvote</button>
+        <button class="vote-btn" onclick="vote('salad', -1)">👎 Downvote</button>
+        <p>Votes: <span id="salad-votes">0</span></p>
+    </div>
+
+    <script src="script.js"></script> <!-- Link JavaScript -->
+</body>
+</html>
