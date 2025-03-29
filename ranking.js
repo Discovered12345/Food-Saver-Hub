@@ -17,16 +17,23 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Function to handle the vote logic
-    function vote(food, value) {
-        if (value === 1) {
-            votes[food].upvotes++;
-        } else {
-            votes[food].downvotes++;
-        }
-        votes[food].total = votes[food].upvotes - votes[food].downvotes;
-        localStorage.setItem("votes", JSON.stringify(votes));
-        updateUI();
+function vote(food, value) {
+    // Ensure upvotes, downvotes, and total are initialized correctly
+    if (!votes[food]) {
+        votes[food] = { upvotes: 0, downvotes: 0, total: 0 };
     }
+
+    if (value === 1) {
+        votes[food].upvotes = (votes[food].upvotes || 0) + 1;
+    } else {
+        votes[food].downvotes = (votes[food].downvotes || 0) + 1;
+    }
+
+    votes[food].total = votes[food].upvotes - votes[food].downvotes;
+    localStorage.setItem("votes", JSON.stringify(votes));
+    updateUI();
+}
+
 
     // Function to sort the food items based on total votes
     function sortFoodItems() {
