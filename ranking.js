@@ -1,49 +1,47 @@
-// Load votes from LocalStorage or set defaults
-let votes = JSON.parse(localStorage.getItem("votes")) || {
-    pizza: { up: 0, down: 0 },
-    burger: { up: 0, down: 0 },
-    salad: { up: 0, down: 0 }
-};
+document.addEventListener("DOMContentLoaded", function () {
+    let votes = JSON.parse(localStorage.getItem("votes")) || {
+        pizza: { upvotes: 0, downvotes: 0, total: 0 },
+        burger: { upvotes: 0, downvotes: 0, total: 0 },
+        salad: { upvotes: 0, downvotes: 0, total: 0 }
+    };
 
-// Function to handle voting
-function vote(food, change) {
-    if (change === 1) {
-        votes[food].up += 1;
-    } else if (change === -1) {
-        votes[food].down += 1;
+    function updateUI() {
+        Object.keys(votes).forEach(food => {
+            document.getElementById(`${food}-upvotes`).textContent = votes[food].upvotes;
+            document.getElementById(`${food}-downvotes`).textContent = votes[food].downvotes;
+            document.getElementById(`${food}-total`).textContent = votes[food].total;
+        });
+
+        sortFoodItems();
     }
-    localStorage.setItem("votes", JSON.stringify(votes)); // Save votes locally
-    updateVotes();
-}
 
-// Update displayed votes and reorder items
-function updateVotes() {
-    const foodContainer = document.getElementById("food-container");
-    const foodItems = Array.from(foodContainer.getElementsByClassName("food-item"));
+    function vote(food, value) {
+        if (value === 1) {
+            votes[food].upvotes++;
+        } else {
+            votes[food].downvotes++;
+        }
+        votes[food].total = votes[food].upvotes - votes[food].downvotes;
+        localStorage.setItem("votes", JSON.stringify(votes));
+        updateUI();
+    }
 
-    foodItems.forEach(item => {
-        const food = item.getAttribute("data-food");
-        const upvotes = votes[food].up;
-        const downvotes = votes[food].down;
-        const totalVotes = upvotes - downvotes;
+    function sortFoodItems() {
+        let container = document.getElementById("food-container");
+        let items = Array.from(container.getElementsByClassName("food-item"));
 
-        document.getElementById(`${food}-upvotes`).textContent = upvotes;
-        document.getElementById(`${food}-downvotes`).textContent = downvotes;
-        document.getElementById(`${food}-total`).textContent = totalVotes;
-    });
+        items.sort((a, b) => {
+            let foodA = a.dataset.food;
+            let foodB = b.dataset.food;
+            return votes[foodB].total - votes[foodA].total; // Sort descending
+        });
 
-    // Sort food items based on total votes
-    foodItems.sort((a, b) => {
-        const foodA = a.getAttribute("data-food");
-        const foodB = b.getAttribute("data-food");
-        const totalA = votes[foodA].up - votes[foodA].down;
-        const totalB = votes[foodB].up - votes[foodB].down;
-        return totalB - totalA;
-    });
+        items.forEach(item => container.appendChild(item));
+    }
 
-    // Reorder food items in the DOM
-    foodItems.forEach(item => foodContainer.appendChild(item));
-}
+    // Ensure buttons work
+    window.vote = vote;
 
-// Initialize votes on page load
-updateVotes();
+    // Initialize UI
+    updateUI();
+});
