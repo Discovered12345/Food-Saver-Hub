@@ -4,33 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Voting</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link CSS -->
+    <link rel="stylesheet" href="styles.css"> <!-- Link to CSS -->
 </head>
 <body>
 
     <h1>Vote for Your Favorite Food! 🍽️</h1>
 
-    <div class="food-item">
-        <h3>🍕 Pizza</h3>
-        <button class="vote-btn" onclick="vote('pizza', 1)">👍 Upvote</button>
-        <button class="vote-btn" onclick="vote('pizza', -1)">👎 Downvote</button>
-        <p>Votes: <span id="pizza-votes">0</span></p>
+    <div id="food-container">
+        <div class="food-item" data-food="pizza">
+            <h3>🍕 Pizza</h3>
+            <button class="vote-btn upvote" onclick="vote('pizza', 1)">👍 Upvote</button>
+            <span class="upvote-count" id="pizza-upvotes">0</span>
+            <button class="vote-btn downvote" onclick="vote('pizza', -1)">👎 Downvote</button>
+            <span class="downvote-count" id="pizza-downvotes">0</span>
+            <p>Total Votes: <span class="total-votes" id="pizza-total">0</span></p>
+        </div>
+
+        <div class="food-item" data-food="burger">
+            <h3>🍔 Burger</h3>
+            <button class="vote-btn upvote" onclick="vote('burger', 1)">👍 Upvote</button>
+            <span class="upvote-count" id="burger-upvotes">0</span>
+            <button class="vote-btn downvote" onclick="vote('burger', -1)">👎 Downvote</button>
+            <span class="downvote-count" id="burger-downvotes">0</span>
+            <p>Total Votes: <span class="total-votes" id="burger-total">0</span></p>
+        </div>
+
+        <div class="food-item" data-food="salad">
+            <h3>🥗 Salad</h3>
+            <button class="vote-btn upvote" onclick="vote('salad', 1)">👍 Upvote</button>
+            <span class="upvote-count" id="salad-upvotes">0</span>
+            <button class="vote-btn downvote" onclick="vote('salad', -1)">👎 Downvote</button>
+            <span class="downvote-count" id="salad-downvotes">0</span>
+            <p>Total Votes: <span class="total-votes" id="salad-total">0</span></p>
+        </div>
     </div>
 
-    <div class="food-item">
-        <h3>🍔 Burger</h3>
-        <button class="vote-btn" onclick="vote('burger', 1)">👍 Upvote</button>
-        <button class="vote-btn" onclick="vote('burger', -1)">👎 Downvote</button>
-        <p>Votes: <span id="burger-votes">0</span></p>
-    </div>
-
-    <div class="food-item">
-        <h3>🥗 Salad</h3>
-        <button class="vote-btn" onclick="vote('salad', 1)">👍 Upvote</button>
-        <button class="vote-btn" onclick="vote('salad', -1)">👎 Downvote</button>
-        <p>Votes: <span id="salad-votes">0</span></p>
-    </div>
-
-    <script src="script.js"></script> <!-- Link JavaScript -->
+    <script src="script.js"></script> <!-- Link to JavaScript -->
 </body>
 </html>
