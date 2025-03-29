@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Waste Pledge</title>
+    <style>
+        body {
+            background-color: #eaf4e2;
+            color: #2e7d32;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: #c8e6c9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            margin-top: 20px;
+        }
+        select, input, button {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #388e3c;
+        }
+        button {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #388e3c;
+        }
+        .pledge-list {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Food Waste Pledge</h1>
+    <h2>Make a commitment to help the environment!</h2>
+    
+    <div class="container">
+        <p><strong>I, <input type="text" id="nameInput" placeholder="Your Name">, pledge to:</strong></p>
+        <select id="pledgeSelect">
+            <option value="reduce portion sizes">Reduce portion sizes</option>
+            <option value="compost food scraps">Compost food scraps</option>
+            <option value="support local farms">Support local farms</option>
+            <option value="store food properly">Store food properly</option>
+            <option value="donate extra food">Donate extra food</option>
+        </select>
+        <br>
+        <button onclick="makePledge()">Make Pledge</button>
+    </div>
+    
+    <div class="pledge-list" id="pledgeList"></div>
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <h1>Sustainable Food Game</h1>
+    <h2>Made by Ivana and Sundew</h2>
+  <h2>Instructions to play:</h2>
+    <p>Read the statement and select True or False to input your answer. Answer all questions right to win!</p>
+    
+<iframe width="410" height="460"
+   src="https://academy.cs.cmu.edu/sharing/steelBlueDolphin6544/embed">
+ </iframe>
+  
+
+    <a href="https://example.com/" target="_blank">Learn more here!</a>
+    <script>
+        function makePledge() {
+            let name = document.getElementById("nameInput").value.trim();
+            let pledge = document.getElementById("pledgeSelect").value;
+            if (name === "") {
+                alert("Please enter your name before making a pledge.");
+                return;
+            }
+            let pledgeText = `<p>${name} pledges to ${pledge}!</p>`;
+            document.getElementById("pledgeList").innerHTML += pledgeText;
+            document.getElementById("nameInput").value = "";
+        }
+    </script>
+</body>
+</html>
