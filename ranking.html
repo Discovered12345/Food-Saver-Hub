@@ -11,23 +11,3 @@
     <button onclick="vote('burger', -1)">👎 Downvote</button>
     <p>Votes: <span id="burger-votes">0</span></p>
 </div>
-
-<script>
-  // Load votes from LocalStorage or default to 0
-  let votes = JSON.parse(localStorage.getItem("votes")) || { pizza: 0, burger: 0 };
-
-  // Function to handle votes
-  function vote(food, change) {
-      votes[food] += change;
-      localStorage.setItem("votes", JSON.stringify(votes)); // Save votes
-      updateVotes();
-  }
-
-  // Update displayed votes
-  function updateVotes() {
-      document.getElementById("pizza-votes").textContent = votes.pizza;
-      document.getElementById("burger-votes").textContent = votes.burger;
-  }
-
-  updateVotes(); // Load votes on page load
-</script>
