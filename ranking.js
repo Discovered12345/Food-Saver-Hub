@@ -1,20 +1,19 @@
-// Object to store vote counts
-let votes = {
-    Pasta: 0,
-    Salad: 0,
-    Pizza: 0
-};
+// Load votes from LocalStorage or set defaults
+let votes = JSON.parse(localStorage.getItem("votes")) || { pizza: 0, burger: 0, salad: 0 };
 
-// Function to update votes
-function updateVotes(meal) {
-    votes[meal]++; // Increment vote count
-    document.getElementById(meal.toLowerCase() + "Votes").textContent = votes[meal]; // Update UI
-    document.getElementById("voteMessage").textContent = `You voted for ${meal}!`;
+// Function to handle voting
+function vote(food, change) {
+    votes[food] += change;
+    localStorage.setItem("votes", JSON.stringify(votes)); // Save votes locally
+    updateVotes();
 }
 
-// Add event listeners to buttons
-document.querySelectorAll(".voteButton").forEach(button => {
-    button.addEventListener("click", function() {
-        updateVotes(this.getAttribute("data-meal"));
-    });
-});
+// Update displayed votes
+function updateVotes() {
+    document.getElementById("pizza-votes").textContent = votes.pizza;
+    document.getElementById("burger-votes").textContent = votes.burger;
+    document.getElementById("salad-votes").textContent = votes.salad;
+}
+
+// Initialize votes on page load
+updateVotes();
