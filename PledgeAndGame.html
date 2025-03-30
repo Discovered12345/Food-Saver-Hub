@@ -12,6 +12,7 @@
             text-align: center;
             padding: 20px;
         }
+        
         .container {
             background: #c8e6c9;
             padding: 20px;
@@ -20,24 +21,29 @@
             display: inline-block;
             margin-top: 20px;
         }
+        
         select, input, button {
             padding: 10px;
             margin: 10px;
             border-radius: 5px;
             border: 1px solid #388e3c;
         }
+        
         button {
             background-color: #4caf50;
             color: white;
             cursor: pointer;
         }
+        
         button:hover {
             background-color: #388e3c;
         }
+        
         .pledge-list {
             margin-top: 20px;
             font-weight: bold;
         }
+        
     </style>
 </head>
 <body>
@@ -88,12 +94,13 @@
  <br>
  
     <a href="https://example.com/" target="_blank">Learn more here!</a><!--add link-->
+    
     <script>
         function makePledge() {
             let name = document.getElementById("nameInput").value.trim();
             let pledge = document.getElementById("pledgeSelect").value;
             if (name === "") {
-                alert("Please enter your name before making a pledge.");
+                alert("Please enter your name.");
                 return;
             }
             let pledgeText = `<p>${name} pledges to ${pledge}!</p>`;
