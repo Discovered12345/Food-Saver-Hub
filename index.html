@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodSaver Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Login Section -->
+        <div id="login-section" class="section">
+            <div class="auth-container">
+                <h2>FoodSaver Hub</h2>
+                <p class="subtitle">Reducing food waste in schools, one meal at a time.</p>
+                <div class="auth-tabs">
+                    <div class="auth-tab active" onclick="toggleAuth('login')">Login</div>
+                    <div class="auth-tab" onclick="toggleAuth('register')">Register</div>
+                </div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+                <form id="register-form" class="hidden">
+                    <div class="form-group">
+                        <label for="register-name">Full Name</label>
+                        <input type="text" id="register-name" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-role">Role</label>
+                        <select id="register-role" required>
+                            <option value="">Select your role</option>
+                            <option value="student">Student</option>
+                            <option value="staff">Cafeteria Staff</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main Dashboard -->
+        <div id="dashboard" class="hidden">
+            <nav class="navbar">
+                <div class="nav-content">
+                    <div class="nav-logo">
+                        <img src="https://api.iconify.design/lucide:leaf.svg?color=%234ade80" alt="Logo" class="logo-icon">
+                        <span>FoodSaver Hub</span>
+                    </div>
+                    <div class="nav-links">
+                        <button onclick="showSection('voting-section')" class="nav-button">Vote</button>
+                        <button onclick="showSection('food-board')" class="nav-button">Food Board</button>
+                        <button onclick="showSection('meal-planning')" class="nav-button">Meal Planning</button>
+                        <button onclick="showSection('analytics')" class="nav-button">Analytics</button>
+                        <button onclick="showSection('games')" class="nav-button">Games</button>
+                    </div>
+                    <div class="user-profile">
+                        <span id="user-name"></span>
+                        <button onclick="logout()" class="logout-button">Logout</button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Voting Section -->
+            <div id="voting-section" class="dashboard-section">
+                <div class="voting-header">
+                    <h1>Vote for Your Favorite Foods</h1>
+                    <p>Help us plan next week's menu by voting for your preferred meals</p>
+                </div>
+                <div class="voting-grid" id="voting-grid">
+                    <!-- Food voting cards will be dynamically added here -->
+                </div>
+            </div>
+
+            <!-- Food Board -->
+            <div id="food-board" class="dashboard-section hidden">
+                <div class="section-header">
+                    <h1>Available Food Items</h1>
+                    <p>Claim available food items to reduce waste</p>
+                </div>
+                <div class="food-list" id="available-food">
+                    <!-- Food items will be dynamically added here -->
+                </div>
+                <div id="staff-controls" class="hidden">
+                    <div class="add-food-form">
+                        <h3>Add New Food Item</h3>
+                        <form id="add-food-form">
+                            <div class="form-group">
+                                <label for="food-name">Food Item Name</label>
+                                <input type="text" id="food-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="food-quantity">Quantity</label>
+                                <input type="number" id="food-quantity" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="food-expiry">Expiry Date</label>
+                                <input type="date" id="food-expiry" required>
+                            </div>
+                            <button type="submit">Add Item</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meal Planning -->
+            <div id="meal-planning" class="dashboard-section hidden">
+                <div class="section-header">
+                    <h1>Weekly Meal Planning</h1>
+                    <p>View and plan upcoming meals based on student votes</p>
+                </div>
+                <div class="meal-grid" id="meal-grid">
+                    <!-- Meal planning cards will be dynamically added here -->
+                </div>
+            </div>
+
+            <!-- Analytics -->
+            <div id="analytics" class="dashboard-section hidden">
+                <div class="section-header">
+                    <h1>Food Waste Analytics</h1>
+                    <p>Track our impact on reducing food waste</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Food Saved</h3>
+                        <div class="value" id="food-saved">0 kg</div>
+                        <div class="description">Total food rescued from waste</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>CO₂ Emissions Reduced</h3>
+                        <div class="value" id="co2-reduced">0 kg</div>
+                        <div class="description">Environmental impact</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Money Saved</h3>
+                        <div class="value" id="money-saved">$0</div>
+                        <div class="description">Economic impact</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h2>Food Preference Trends</h2>
+                    <canvas id="preference-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- Games Section -->
+            <div id="games" class="dashboard-section hidden">
+                <div class="section-header">
+                    <h1>Educational Games</h1>
+                    <p>Learn about food waste while having fun</p>
+                </div>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <h3>Food Waste Challenge</h3>
+                        <div class="game-frame">
+                            <iframe src="https://academy.cs.cmu.edu/sharing/steelBlueDolphin6544/embed" 
+                                    frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="game-card">
+                        <h3>Nutrition Master</h3>
+                        <div class="game-frame">
+                            <iframe src="https://academy.cs.cmu.edu/sharing/deepSkyBlueCow8745/embed" 
+                                    frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
